@@ -22,15 +22,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
 
-      - name: Dependencies
-        run: 
-          npm install -g corepack
-          corepack enable
-          corepack prepare pnpm@latest-8 --activate
-          pnpm config set store-dir .pnpm-store
-          pnpm install
-      
-      - name: build
+      - name: Install corepack
+        run: pnpm install -g corepack
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Prepare corepack for pnpm
+        run: corepack prepare pnpm@latest-8 --activate
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
         run: pnpm build
 
   deploy-qa:
