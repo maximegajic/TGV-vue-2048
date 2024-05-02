@@ -24,6 +24,7 @@ jobs:
 
       - name: Dependencies
         run: 
+          npm install -g corepack
           corepack enable
           corepack prepare pnpm@latest-8 --activate
           pnpm config set store-dir .pnpm-store
