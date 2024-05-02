@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - lab9
+  pull_request:
     
 env:
   BUILD_ARTIFACT_NAME: "package"
@@ -36,12 +37,28 @@ jobs:
 
       - name: Build
         run: pnpm build
-        
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
           path: dist/
+
+  quality_and_tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: type_check
+        run: pnpm type-check
+      
+      - name: lint
+        run: pnpm lint
+
+      - name: test
+        run: pnpm test
+
 
   deploy-qa:
     needs: build
