@@ -19,6 +19,19 @@ jobs:
         with:
           version: latest
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Dependencies
+        run: 
+          corepack enable
+          corepack prepare pnpm@latest-8 --activate
+          pnpm config set store-dir .pnpm-store
+          pnpm install
+      
+      - name: build
+        run: pnpm build
+
   deploy-qa:
     needs: build
     runs-on: ubuntu-latest
