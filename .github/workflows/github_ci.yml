@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Install corepack
-        run: pnpm install -g corepack
+        run: npm install -g corepack
 
       - name: Enable corepack
         run: corepack enable
