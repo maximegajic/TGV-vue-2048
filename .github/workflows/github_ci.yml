@@ -1,0 +1,32 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - lab09
+    
+env:
+  BUILD_ARTIFACT_NAME: "package"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+  deploy-qa:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+  deploy-prod:
+    needs: deploy-qa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
