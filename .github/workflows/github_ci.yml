@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - lab9
+      - main
   pull_request:
     
 env:
@@ -47,6 +48,7 @@ jobs:
   quality_and_tests:
     runs-on: ubuntu-latest
     needs: build
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v3
 
