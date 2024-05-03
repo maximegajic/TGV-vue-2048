@@ -10,6 +10,15 @@ on:
       - lab9
       - main
   workflow_dispatch:
+    inputs:
+      run-quality:
+        description: 'Run quality?'
+        required: false
+        default: 'false' 
+      run-tests:
+        description: 'Run tests?'
+        required: false
+        default: 'false'
     
 env:
   BUILD_ARTIFACT_NAME: "package"
@@ -52,7 +61,7 @@ jobs:
   quality_and_tests:
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
 
@@ -77,12 +86,15 @@ jobs:
         run: pnpm install
 
       - name: type_check
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.run-quality == 'true'
         run: pnpm type-check
       
       - name: lint
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.run-quality == 'true'
         run: pnpm lint
 
       - name: test
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.run-tests == 'true'
         run: pnpm test
 
 
