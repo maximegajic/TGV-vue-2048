@@ -61,8 +61,9 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
+          name: art_name
           path: dist/
+          retention-days: ${{ github.ref == 'refs/heads/main' && 7 || 1 }}
 
   quality_and_tests:
     runs-on: ubuntu-latest
@@ -134,7 +135,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
+          name: art_name
           path: dist/
 
 
@@ -176,7 +177,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
+          name: art_name
           path: dist/
       
 
