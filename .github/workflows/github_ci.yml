@@ -6,6 +6,10 @@ on:
       - lab9
       - main
   pull_request:
+    branches:
+      - lab9
+      - main
+  workflow_dispatch:
     
 env:
   BUILD_ARTIFACT_NAME: "package"
