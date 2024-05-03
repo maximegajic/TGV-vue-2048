@@ -61,7 +61,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: ${{ github.event.artifacts.ARTIFACT_NAME }}
           path: dist/
 
   quality_and_tests:
@@ -131,6 +131,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ github.event.artifacts.ARTIFACT_NAME }}
+          path: dist/
+
+
       - name: Install swa
         run: pnpm install @azure/static-web-apps-cli
 
@@ -165,6 +172,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ github.event.artifacts.ARTIFACT_NAME }}
+          path: dist/
+      
 
       - name: Install swa
         run: pnpm install @azure/static-web-apps-cli
