@@ -108,7 +108,7 @@ jobs:
   deploy-qa:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
 
@@ -150,7 +150,7 @@ jobs:
   deploy-prod:
     needs: deploy-qa
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
 
@@ -188,4 +188,4 @@ jobs:
         env:
           AZURE_TOKEN_PROD: ${{ secrets.DEPLOYMENT_TOKEN_AZURE_PROD }}
         run: pnpm swa deploy ./dist --app-name stapp-vue2048-qa -d $AZURE_TOKEN_PROD
-        
+
