@@ -145,7 +145,7 @@ jobs:
       - name: Deploy QA
         env:
           AZURE_TOKEN_QA: ${{ secrets.DEPLOYEMENT_TOKEN_AZURE_QA }}
-        run: swa deploy ./dist --app-name stapp-vue2048-qa -d $AZURE_TOKEN_QA
+        run: pnpm swa deploy ./dist --app-name stapp-vue2048-qa -d $AZURE_TOKEN_QA
 
   deploy-prod:
     needs: deploy-qa
@@ -187,4 +187,4 @@ jobs:
       - name: Deploy Prod
         env:
           AZURE_TOKEN_PROD: ${{ secrets.DEPLOYEMENT_TOKEN_AZURE_PROD }}
-        run: swa deploy ./dist --app-name stapp-vue2048-qa -d $AZURE_TOKEN_PROD
+        run: pnpm swa deploy ./dist --app-name stapp-vue2048-qa -d $AZURE_TOKEN_PROD
