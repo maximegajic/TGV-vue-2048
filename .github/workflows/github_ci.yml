@@ -132,7 +132,7 @@ jobs:
         run: pnpm install
 
       - name: Install swa
-        run: pnpm install @azure/static-web-apps-cli@latest
+        run: pnpm install @azure/static-web-apps-cli
 
       - name: Deploy QA
         env:
@@ -167,7 +167,7 @@ jobs:
         run: pnpm install
 
       - name: Install swa
-        run: pnpm install @azure/static-web-apps-cli@latest
+        run: pnpm install @azure/static-web-apps-cli
 
       - name: Deploy Prod
         env:
