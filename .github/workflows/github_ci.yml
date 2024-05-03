@@ -19,6 +19,8 @@ on:
         description: 'Run tests?'
         required: false
         default: 'false'
+  schedule:
+    - cron: '0 8 * * 1'
     
 env:
   BUILD_ARTIFACT_NAME: "package"
